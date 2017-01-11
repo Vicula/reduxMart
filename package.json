@@ -1,0 +1,20 @@
+{
+  "name": "simpleSetup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vicula/simpleSetup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vicula/simpleSetup/issues"
+  },
+  "homepage": "https://github.com/Vicula/simpleSetup#readme"
+}
