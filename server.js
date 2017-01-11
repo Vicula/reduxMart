@@ -1,25 +1,43 @@
-var express = require('express');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpack = require('webpack');
-var webpackConfig = require('./webpack.config.js');
-var app = express();
 
-var compiler = webpack(webpackConfig);
+//IMPORTS
+//--------------
+//import express web server
+const express = require('express')
+//import templating engine for rendering HTML
+const renderFile = require('ejs').renderFile
 
-app.use(express.static(__dirname + '/www'));
+//run the express app
+const app = express()
 
-app.use(webpackDevMiddleware(compiler, {
-  hot: true,
-  filename: 'bundle.js',
-  publicPath: '/',
-  stats: {
-    colors: true,
-  },
-  historyApiFallback: true,
-}));
+// set port if exists in environment for heroku or live site, else set to 3000 for dev
+const PORT = process.env.PORT || 3000
 
-var server = app.listen(3000, function() {
-  var host = server.address().address;
-  var port = server.address().port;
-  console.log('Example app listening at http://%s:%s', host, port);
+
+//CONFIGURING TEMPLATING ENGINE FOR .HTML
+//-----------------------
+app.set('views', './public');
+app.engine('html', renderFile)
+app.set('view engine', 'html');
+
+// CONFIGURING STATIC FILES  (js, css, images)
+// ------------------------------
+// js, css, and imafiles from dist/assets/
+app.use( express.static( __dirname + '/public') );
+
+//handle GET requests to `/` (root)
+app.get('/', function (req, res) {
+  res.render('index.html');
 });
+
+//handle GET requests to `/about` and serve page `about-page.html`
+app.get('/about', function (req, res) {
+  res.render('about-page.html');
+});
+
+//Set the port location
+app.set('port', PORT)
+
+//Tell Server to listen @ port-location
+app.listen(PORT,function() {
+	console.log('\n\n===== listening for requests on port ' + PORT + ' =====\n\n')
+})
