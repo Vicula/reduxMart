@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { combieReducers, createStore } from 'redux';
 
 
 const reducer = function(state, action) {

@@ -10,7 +10,10 @@ var userStore = {
 }
 
 
-const userReducer = (store=(...userStore), actions) => {
+const userReducer = (store=(...userStore), action) => {
   let newStore = store;
+  switch (action.type){
+
+  }
   return newStore
 }
