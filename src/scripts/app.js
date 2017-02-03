@@ -34,7 +34,7 @@ var merchStore = {
 }
 
 
-const userReducer = (store=userStore, action) => {
+const userReducer = (store=[...userStore], action) => {
   let newStore = store;
   switch (action.type){
     case "NEW_USER" : {
@@ -43,16 +43,13 @@ const userReducer = (store=userStore, action) => {
   }
   return newStore
 }
-const merchReducer = (store=merchStore, action) => {
+const merchReducer = (store=[...merchStore], action) => {
   let newStore = store;
   switch (action.type){
     case "NEW_MERCH" : {
       let merch = new newMerch
       newStore.merch.push(merch)
       return newStore
-      break;
-    }
-    default {
       break;
     }
   }

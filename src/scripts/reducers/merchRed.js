@@ -21,9 +21,6 @@ const merchReducer = (store=merchStore, action) => {
       return newStore
       break;
     }
-    default {
-      break;
-    }
   }
   return newStore
 }
