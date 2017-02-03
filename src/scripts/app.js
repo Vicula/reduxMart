@@ -1,22 +1,15 @@
-// console.log('Hello World!');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-// import Counter from './Counter';
-//
-// document.addEventListener('DOMContentLoaded', function() {
-//   ReactDOM.render(
-//     // React.createElement(Counter),
-//     document.getElementById('mount')
-//   );
-// });
 
 
 const reducer = function(state, action) {
   let newState = state;
-  ? action.type === "NAME_CHANGE" : () => {
-
+  if (action.type === "NAME_CHANGE"){
+    newState.name = action.payload
+    return newState
   }
+  return newState
 }
 
 
@@ -26,4 +19,4 @@ store.subscribe( () => {
   console.log("here be the store", store.getState())
 })
 
-store.dispatch({tpye: "NAME_CHANGE", payload: 'will'})
+store.dispatch({type: "NAME_CHANGE", payload: 'will'})
