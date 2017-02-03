@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { combieReducers, createStore } from 'redux';
+import { combineReducers, createStore } from 'redux';
 
 
 // const reducer = function(state, action) {
@@ -34,16 +34,20 @@ var merchStore = {
 }
 
 
-const userReducer = (store=[...userStore], action) => {
-  let newStore = store;
+const userReducer = (state=[], action) => {
+  let newStore = [...state];
   switch (action.type){
     case "NEW_USER" : {
-      let user = new newUser
+      let user = [...newUser]
+      user.username = action.payload
+      newStore.push(user)
+      return newStore
+      break
     }
   }
   return newStore
 }
-const merchReducer = (store=[...merchStore], action) => {
+const merchReducer = (store=[], action) => {
   let newStore = store;
   switch (action.type){
     case "NEW_MERCH" : {
@@ -56,17 +60,18 @@ const merchReducer = (store=[...merchStore], action) => {
   return newStore
 }
 
-const reducers = combieReducers({
+const reducers = combineReducers({
   user: userReducer,
   merch: merchReducer
 })
 
 
 
-const store = createStore(reducers, {name: 'fred', age: 35});
+const store = createStore(reducers, {user:[], merch: []});
 
 store.subscribe( () => {
   console.log("here be the store", store.getState())
 })
 
-store.dispatch({type: "NAME_CHANGE", payload: 'will'})
+store.dispatch({type: "NEW_USER", payload: 'will'})
+store.dispatch({type: "NEW_USER", payload: 'amy'})
