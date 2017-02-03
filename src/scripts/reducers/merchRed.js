@@ -15,8 +15,14 @@ var merchStore = {
 const merchReducer = (store=merchStore, action) => {
   let newStore = store;
   switch (action.type){
-    case "NEW_USER" : {
-      let user = new newUser
+    case "NEW_MERCH" : {
+      let merch = new newMerch
+      newStore.merch.push(merch)
+      return newStore
+      break;
+    }
+    default {
+      break;
     }
   }
   return newStore
