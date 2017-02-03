@@ -35,24 +35,27 @@ var merchStore = {
 
 
 const userReducer = (state=[], action) => {
-  let newStore = [...state];
+  let newState = [...state]
   switch (action.type){
     case "NEW_USER" : {
-      let user = [...newUser]
-      user.username = action.payload
-      newStore.push(user)
-      return newStore
+      return [...state,
+      {
+        username: action.payload,
+        age: '',
+        desc: ''
+      }]
       break
     }
   }
-  return newStore
+  return newState
 }
 const merchReducer = (store=[], action) => {
-  let newStore = store;
+  let newStore = [...store];
   switch (action.type){
     case "NEW_MERCH" : {
-      let merch = new newMerch
-      newStore.merch.push(merch)
+      let merch =  [...newMerch]
+      merch.name = action.payload
+      newStore.push(merch)
       return newStore
       break;
     }
@@ -67,11 +70,15 @@ const reducers = combineReducers({
 
 
 
-const store = createStore(reducers, {user:[], merch: []});
+const store = createStore(reducers, {
+  user:[],
+  merch: []
+});
 
 store.subscribe( () => {
   console.log("here be the store", store.getState())
 })
 
 store.dispatch({type: "NEW_USER", payload: 'will'})
+store.dispatch({type: "NEW_MERCH", payload: 'Weed Wacker'})
 store.dispatch({type: "NEW_USER", payload: 'amy'})
